@@ -2,6 +2,19 @@ def getzvalues(pattern):
     zvalues = [];
     r = 0;
     for pos in range(1, len(pattern[1:])):
+        if (pos > r):
+            #manually compute
+            pass
+        if (pos <= r):
+            zkprime = "";
+            beta = "";
+            if (zkprime < beta):
+                pass
+            if (zkprime > beta):
+                pass
+            if (zkprime == beta):
+                pass
+
         for char in pattern:
             zvalue = 0;
             if pattern[pos] == char:
