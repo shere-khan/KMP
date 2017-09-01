@@ -1,15 +1,18 @@
 def getzvalues(pattern):
     zvalues = []
+    zvalues.append(0)
     r = 0
     l = 0
     for k in range(1, len(pattern[1:])):
         # Case 1: manually compute
         if k > r:
-            l, k = match_pattern(pattern, zvalues, 0, k, r, l)
+            l, r = match_pattern(pattern, zvalues, 0, k, r)
 
         # Case 2
         elif k <= r:
-            kprime = k - l + 1
+            # kprime usually k - l + 1, but since this is 0-indexed, we are missing one index
+            # so it's just k - l
+            kprime = k - l
             beta = r - k
             zkprime = zvalues[kprime]
 
@@ -18,7 +21,7 @@ def getzvalues(pattern):
                 zvalues.append(zkprime)
 
             # Case 2b: if zkprime is greater than beta, zk equals beta
-            if zkprime > beta:
+            elif zkprime > beta:
                 zk = beta
 
             # Case 2c: if zkprime is equal to beta, zkprime equals the length
@@ -28,29 +31,30 @@ def getzvalues(pattern):
             pos2 = k + beta + 1
             if zkprime == beta:
                 l, k = match_pattern(pattern, zvalues, pos1, pos2, r)
+    return zvalues
 
 
-def match_pattern(pattern, zvalues, pos1, pos2, r, l):
-    for k in range(pos2, len(pattern[pos2:])):
-        for char in range(pos1, len(pattern[pos1:])):
-            zvalue = 0
-            # matches
-            if pattern[k] == char:
-                zvalue += 1
-                k += 1
-            # mismatch reached
-            else:
-                new_r = k + zvalue - 1
-                if new_r > r:
-                    r = new_r
-                    l = k
-                    return l, k
-                zvalues.append(zvalue)
-                break
-
+# pos1 - index on the kprime side
+# pos2 - index on the k side
+def match_pattern(pattern, zvalues, pos1, pos2, r):
+    zvalue = 0
+    for i in pattern[pos2:]:
+        # for i in range(pos2, len(pattern[pos2:])):
+        # matches
+        if i == pattern[pos1]:
+            zvalue += 1
+            pos1 += 1
+        # mismatch reached
+        else:
+            new_r = pos2 + zvalue - 1
+            if new_r > r:
+                r = new_r
+            zvalues.append(zvalue)
+            return pos2, r
 
 if __name__ == '__main__':
-    for i in range(1, len('justin'[2:])):
-        print(i)
-
-    print('hello2')
+    text = 'abababxysldkjfabababaslkdjfabababa'
+    pattern = 'abababa'
+    text_pattern = pattern + '$' + text
+    zvalues = getzvalues(text_pattern)
+    print(zvalues)
