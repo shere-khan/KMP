@@ -5,28 +5,40 @@ def getzvalues(pattern):
     for k in range(1, len(pattern[1:])):
         # Case 1: manually compute
         if k > r:
-            match_pattern(pattern, zvalues, 0, k, r, l)
+            l, k = match_pattern(pattern, zvalues, 0, k, r, l)
 
         # Case 2
         elif k <= r:
-            zkprime = k - l + 1
+            kprime = k - l + 1
             beta = r - k
+            zkprime = zvalues[kprime]
 
-            # Case 2a: zkprime = zk
+            # Case 2a: if zkprime is less than beta, zk equals zkprime
             if zkprime < beta:
-                pass
+                zvalues.append(zkprime);
 
-            # Case 2b: zkprime = beta
+            # Case 2b: if zkprime is greater than beta, zk equals beta
             if zkprime > beta:
                 pass
 
-            # Case 2c: zkprime = beta + matched strings starting
-            # at position zkprime + kprime + 1
-            kprime = "" # TODO ??
+            # Case 2c: if zkprime is equal to beta, zkprime equals the length
+            # of beta plus the number of matched strings starting
+            # at position zkprime + kprime + 1 until a mismatch is reached
+            kprime = k - l + 1;
             pos1 = kprime + zkprime + -1
             pos2 = k + beta + 1
             if zkprime == beta:
                 match_pattern(pattern, zvalues, pos1, pos2, r)
+
+
+def case2a():
+    pass
+
+def case2b():
+    pass
+
+def case2c():
+    pass
 
 
 def match_pattern(pattern, zvalues, pos1, pos2, r, l):
@@ -43,6 +55,7 @@ def match_pattern(pattern, zvalues, pos1, pos2, r, l):
                 if new_r > r:
                     r = new_r
                     l = k
+                    return l, k
                 zvalues.append(zvalue)
                 break
 
