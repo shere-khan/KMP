@@ -13,7 +13,7 @@ def getzvalues(pattern):
             # kprime usually k - l + 1, but since this is 0-indexed, we are missing one index
             # so it's just k - l
             kprime = k - l
-            beta = r - k
+            beta = r - k + 1
             zkprime = zvalues[kprime]
 
             # Case 2a: if zkprime is less than beta, zk equals zkprime
@@ -22,7 +22,7 @@ def getzvalues(pattern):
 
             # Case 2b: if zkprime is greater than beta, zk equals beta
             elif zkprime > beta:
-                zk = beta
+                zvalues.append(beta)
 
             # Case 2c: if zkprime is equal to beta, zkprime equals the length
             # of beta plus the number of matched strings starting
