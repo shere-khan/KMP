@@ -1,4 +1,7 @@
 class ZAlgorithm:
+    def __init__(self):
+        pass
+
     def getzvalues(self, pattern, zvalues):
         zvalues.append(0)
         r = 0
