@@ -37,9 +37,6 @@ class ZAlgorithm:
                     zvalues.append(zvalue + beta)
 
     def match_pattern(self, pattern, pos1, pos2, r, l):
-        # print(len(pattern))
-        # if pos2 > len(pattern) - 1:
-        #     return l, r
         zvalue = 0
         match = False
         sub = pattern[pos2:]
@@ -50,6 +47,7 @@ class ZAlgorithm:
                 match = True
                 zvalue += 1
                 pos1 += 1
+
             # mismatch reached
             else:
                 new_r = pos2 + zvalue - 1
@@ -57,9 +55,7 @@ class ZAlgorithm:
                     r = new_r
                     return pos2, r, zvalue
                 return l, r, zvalue
-        # TODO: flesh out the case when the end of the string
-        # is reached with matching characters but there are
-        # still suffixes of the string that need zk values
+
         if match:
             r = pos2 + zvalue - 1
             return pos2, r, zvalue
