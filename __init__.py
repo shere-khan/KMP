@@ -12,7 +12,7 @@ if __name__ == '__main__':
     # print(zvalues)
 
     tree = tree.KeywordTree()
-    P = ['password', 'passive']
+    P = ['password', 'passive', 'passover', 'heavy']
     for p in P:
         tree.insert(p)
 
