@@ -25,12 +25,8 @@ class Edge:
 class KeywordTree:
     def __init__(self):
         self.root = Node()
-        self.value = None
 
-    def setValue(self, val):
-        self.value = val
-
-    def insert(self, pattern):
+    def insert(self, pattern, value):
         tail = pattern[1:]
         if not self.root.edges:
             edge = Edge()
@@ -39,7 +35,7 @@ class KeywordTree:
             self.root.edges = [edge]
 
             if len(tail) > 0:
-                self.__insert(tail, self.root.edges[0].node)
+                self.__insert(tail, edge.node, value)
         else:
             matched = False
             # Look for a child edge whose value matches the 1st character of
@@ -47,15 +43,28 @@ class KeywordTree:
             for edge in self.root.edges:
                 if edge.value is pattern[0]:
                     matched = True;
-                    self.__insert(tail, edge.node)
+                    self.__insert(tail, edge.node, value)
 
             # If none of the edges contain the character, then
             # create a new child edge for the root and set the value for that edge
             # to be the character. Then visit that child edge
             if not matched:
-                self.__create_edge_recurse(pattern, self.root)
+                self.__create_edge_recurse(pattern, self.root, value)
 
-    def __insert(self, pattern, node):
+    def __insert(self, pattern, node, value):
+        """
+
+        Recursive function that inserts a pattern into the keyword tree.
+        If the string is empty, that means the node value needs to be set to value, which
+        is the index of the pattern in the set
+        Args:
+            pattern:
+            node:
+            value:
+
+        """
+        if pattern is "":
+            node.value = value
         matched = False
         # Look for a child edge whose value matches 1st character of
         # the pattern. If found, visit that child edge's node
@@ -63,19 +72,17 @@ class KeywordTree:
             if edge.value is pattern[0]:
                 matched = True;
                 tail = pattern[1:]
-                if len(tail) is 1:
-                    val = ""
-                self.__insert(tail, edge.node)
+                self.__insert(tail, edge.node, value)
 
         # If none of the edges' values match the character, then
         # create a new child edge and set the value for the new child edge
         # to be the character. Then visit that child edge
         if not matched:
-            self.__create_edge_recurse(pattern, node)
+            self.__create_edge_recurse(pattern, node, value)
 
     # Create a new child edge and set the value for the new child edge
     # to be the character. Then visit that child edge
-    def __create_edge_recurse(self, pattern, node):
+    def __create_edge_recurse(self, pattern, node, value):
         edge = Edge()
         edge.set_node(Node())
         edge.set_value(pattern[:1])
@@ -83,7 +90,7 @@ class KeywordTree:
 
         tail = pattern[1:]
         if len(tail) > 0:
-            self.__insert(tail, edge.node)
+            self.__insert(tail, edge.node, value)
 
     def dfs(self, f):
         for edge in self.root.edges:
@@ -91,6 +98,7 @@ class KeywordTree:
             self.__dfs(f, edge.node)
 
     def __dfs(self, f, node):
+        f(node.value)
         for edge in node.edges:
             f(edge.value)
             self.__dfs(f, edge.node)

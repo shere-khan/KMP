@@ -13,7 +13,7 @@ if __name__ == '__main__':
 
     tree = tree.KeywordTree()
     P = ['password', 'passive', 'passover', 'heavy']
-    for p in P:
-        tree.insert(p)
+    for i, p in enumerate(P):
+        tree.insert(p, i)
 
     tree.dfs(print)
