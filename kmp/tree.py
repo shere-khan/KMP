@@ -40,7 +40,7 @@ class KeywordTree:
                 self.__insert(tail, self.root.edges[0].node)
         else:
             matched = False
-            # Look for a child edge that contains the 1st character of
+            # Look for a child edge whose value matches the 1st character of
             # the pattern. If found, visit that child edge's node
             for edge in self.root.edges:
                 if edge.value is pattern[0]:
@@ -54,20 +54,23 @@ class KeywordTree:
                 self.__create_edge_recurse(pattern, self.root)
 
     def __insert(self, pattern, node):
-        tail = pattern[1:]
         matched = False
+        # Look for a child edge whose value matches 1st character of
+        # the pattern. If found, visit that child edge's node
         for edge in node.edges:
             if edge.value is pattern[0]:
                 matched = True;
-                self.__insert(tail, edge.node)
+                self.__insert(pattern[1:], edge.node)
 
+        # If none of the edges' values match the character, then
+        # create a new child edge and set the value for the new child edge
+        # to be the character. Then visit that child edge
         if not matched:
             self.__create_edge_recurse(pattern, node)
 
+    # Create a new child edge and set the value for the new child edge
+    # to be the character. Then visit that child edge
     def __create_edge_recurse(self, pattern, node):
-        # create edge and set value to be the 1st char of the pattern
-        # Add the new child edge to the nodes list of edges and
-        # travel to the newly created child edge
         edge = Edge()
         edge.set_node(Node())
         edge.set_value(pattern[:1])
@@ -77,12 +80,12 @@ class KeywordTree:
         if len(tail) > 0:
             self.__insert(tail, edge.node)
 
-    def inorder(self, f):
+    def dfs(self, f):
         for edge in self.root.edges:
             f(edge.value)
-            self.__inorder(f, edge.node)
+            self.__dfs(f, edge.node)
 
-    def __inorder(self, f, node):
+    def __dfs(self, f, node):
         for edge in node.edges:
             f(edge.value)
-            self.__inorder(f, edge.node)
+            self.__dfs(f, edge.node)

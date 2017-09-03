@@ -16,4 +16,4 @@ if __name__ == '__main__':
     for p in P:
         tree.insert(p)
 
-    tree.inorder(print)
+    tree.dfs(print)
