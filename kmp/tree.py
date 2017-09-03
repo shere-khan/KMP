@@ -28,6 +28,9 @@ class KeywordTree:
 
     def insert(self, pattern, value):
         tail = pattern[1:]
+        # If the root has no edges (has not yet been visited)
+        # create an edge and set the value of the edge to be the
+        # first character of the
         if not self.root.edges:
             edge = Edge()
             edge.set_node(Node())
@@ -63,8 +66,6 @@ class KeywordTree:
             value:
 
         """
-        if pattern is "":
-            node.value = value
         matched = False
         # Look for a child edge whose value matches 1st character of
         # the pattern. If found, visit that child edge's node
@@ -86,10 +87,11 @@ class KeywordTree:
         edge = Edge()
         edge.set_node(Node())
         edge.set_value(pattern[:1])
-        node.edges.append(edge)
-
         tail = pattern[1:]
-        if len(tail) > 0:
+        node.edges.append(edge)
+        if len(tail) < 1:
+            edge.node.set_value(value)
+        else:
             self.__insert(tail, edge.node, value)
 
     def dfs(self, f):
