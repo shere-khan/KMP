@@ -33,7 +33,7 @@ class ZAlgorithm:
                 # Case 2c: if zkprime is equal to beta, zkprime equals the length
                 # of beta plus the number of matched strings starting
                 # at position zkprime + kprime + 1 until a mismatch is reached
-                if zkprime == beta:
+                if zkprime is beta:
                     pos1 = kprime + beta
                     pos2 = k + beta
                     l, k, zvalue = self.match_pattern(pattern, pos1, pos2, r, l)
@@ -46,7 +46,7 @@ class ZAlgorithm:
         for i in sub:
             # for i in range(pos2, len(pattern[pos2:])):
             # matches
-            if i == pattern[pos1]:
+            if i is pattern[pos1]:
                 match = True
                 zvalue += 1
                 pos1 += 1

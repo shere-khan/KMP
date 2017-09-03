@@ -1,27 +1,71 @@
 class Node:
     def __init__(self):
-        value = 0
-        children = []
+        # self.value = 0
+        # self.children = []
+        self.edges = []
 
-    def __init__(self, val):
-        value = val
-        list = []
+    def set_edges(self, edges):
+        self.edges = edges
 
-class SuffixTree:
+
+class Edge:
     def __init__(self):
-        root = Node()
+        self.node = None
+        self.value = None
 
-    def __init__(self, val):
-        root = Node(val)
+    def set_value(self, value):
+        self.value = value
 
-    def insert(self, val):
-        if self.root.value == val:
-            for child in self.root.children:
-                self.insert(val, child)
+    def set_node(self, node):
+        self.node = node
 
-    def insert(self, val, node):
-        if node.value == val:
-            for child in node.children:
-                self.insert(val, child)
+
+class KeywordTree:
+    def __init__(self):
+        self.root = Node()
+        self.value = None
+
+    def setValue(self, val):
+        self.value = val
+
+    def insert(self, pattern):
+        tail = pattern[1:]
+        if not self.root.edges:
+            edge = Edge()
+            edge.set_node(Node())
+            edge.set_value(pattern[:1])
+            self.root.edges = [edge]
+
+            if len(tail) > 0:
+                self.__insert(tail, self.root.edges[0].node)
         else:
-            node.children.append(Node(val))
+            for edge in self.root.edges:
+                if edge.value is pattern[0]:
+                    self.__insert(tail, edge.node)
+
+    def __insert(self, pattern, node):
+        tail = pattern[1:]
+        matched = False
+        for edge in node.edges:
+            if edge.value is pattern[0]:
+                matched = True;
+                self.__insert(tail, edge.node)
+
+        if not matched:
+            edge = Edge()
+            edge.node = Node()
+            edge.set_value(pattern[:1])
+            node.edges.append(edge)
+
+            if len(tail) > 0:
+                self.__insert(tail, edge.node)
+
+    def inorder(self, f):
+        for edge in self.root.edges:
+            f(edge.value)
+            self.__inorder(f, edge.node)
+
+    def __inorder(self, f, node):
+        for edge in node.edges:
+            f(edge.value)
+            self.__inorder(f, edge.node)
