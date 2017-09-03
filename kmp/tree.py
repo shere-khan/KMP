@@ -1,11 +1,13 @@
 class Node:
     def __init__(self):
-        # self.value = 0
-        # self.children = []
+        self.value = 0
         self.edges = []
 
     def set_edges(self, edges):
         self.edges = edges
+
+    def set_value(self, value):
+        self.value = value
 
 
 class Edge:
@@ -60,7 +62,10 @@ class KeywordTree:
         for edge in node.edges:
             if edge.value is pattern[0]:
                 matched = True;
-                self.__insert(pattern[1:], edge.node)
+                tail = pattern[1:]
+                if len(tail) is 1:
+                    val = ""
+                self.__insert(tail, edge.node)
 
         # If none of the edges' values match the character, then
         # create a new child edge and set the value for the new child edge
