@@ -1,16 +1,9 @@
-from knuth_morris_pratt import zalgorithm, keywordtree, kmp
+from knuth_morris_pratt import keywordtree, kmp
 
 if __name__ == '__main__':
-    z = zalgorithm.ZAlgorithm()
-    # text = 'abababxysldkjfabababaslkdjfabababa'
-    # pattern1 = 'abababa'
-    # text_pattern = pattern1 + '$' + text
-    # zvalues1 = []
-    # z.getzvalues(text_pattern, zvalues)
-
-    # text = 'whereilwherkwheredfwhejswdlwhereiskwhere'
-    text = 'dkwhereisksdf'
-    pattern2 = 'whereis'
+    text = 'kwhereisthatwhereisxsdfwhereissdkfwhereisthatwhereisksdl'
+    pattern2 = 'whereisthatwhereisksd'
+    # pattern2 = 'where'
     occurrences = kmp.KMP.find_pattern(text, pattern2)
     print(occurrences)
 

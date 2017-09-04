@@ -14,7 +14,9 @@ class KMP:
         occurrences = []
         c = 0
         p = 0
-        while c < len(text):
+        print('text', len(text))
+        print('pattern', len(pattern))
+        while c + len(pattern) - p <= len(text):
             while p < len(pattern) and pattern[p] is text[c]:
                 p += 1
                 c += 1
