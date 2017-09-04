@@ -1,7 +1,4 @@
 class ZAlgorithm:
-    def __init__(self):
-        pass
-
     def getzvalues(self, pattern, zvalues):
         zvalues.append(0)
         r = 0
@@ -11,7 +8,7 @@ class ZAlgorithm:
         for k in range(1, lensub + 1):
             # Case 1: manually compute
             if k > r:
-                l, r, zvalue = self.match_pattern(pattern, 0, k, r, l)
+                l, r, zvalue = self.__match_pattern(pattern, 0, k, r, l)
                 zvalues.append(zvalue)
 
             # Case 2
@@ -36,10 +33,10 @@ class ZAlgorithm:
                 if zkprime is beta:
                     pos1 = kprime + beta
                     pos2 = k + beta
-                    l, k, zvalue = self.match_pattern(pattern, pos1, pos2, r, l)
+                    l, k, zvalue = self.__match_pattern(pattern, pos1, pos2, r, l)
                     zvalues.append(zvalue + beta)
 
-    def match_pattern(self, pattern, pos1, pos2, r, l):
+    def __match_pattern(self, pattern, pos1, pos2, r, l):
         zvalue = 0
         match = False
         sub = pattern[pos2:]
