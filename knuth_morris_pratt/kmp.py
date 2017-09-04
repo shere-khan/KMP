@@ -14,17 +14,18 @@ class KMP:
         occurrences = []
         c = 0
         p = 0
-        while c < range(len(text)):
-            while pattern[p] is text[c] and p < len(pattern):
+        while c < len(text):
+            while p < len(pattern) and pattern[p] is text[c]:
                 p += 1
                 c += 1
             # If position p is equal to the lenght of the pattern, then
             # an occurrence of p was found.
-            if p is len(pattern) - 1:
-                occurrences.append(c - len(pattern) + 1)
+            if p is len(pattern):
+                occurrences.append(c - len(pattern))
             # Otherwise, if p is 0, then the first character of the pattern
             # was a mismatch with the current position in the text, c. Thus,
             # we increment c by one and continue
+            # TODO: Ask about when there is an occurence, so p > 0 but c doesn't increment. It should I think
             elif p is 0:
                 c += 1
             p = KMP.__failure(p, spi_primes)
@@ -47,4 +48,4 @@ class KMP:
 
     @staticmethod
     def __failure(i, spi_primes):
-        return spi_primes[i - 1] + 1
+        return spi_primes[i - 1]

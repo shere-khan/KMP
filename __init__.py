@@ -8,7 +8,8 @@ if __name__ == '__main__':
     # zvalues1 = []
     # z.getzvalues(text_pattern, zvalues)
 
-    text = 'whereilwherkwheredfwhejswdlwhereiskwhere'
+    # text = 'whereilwherkwheredfwhejswdlwhereiskwhere'
+    text = 'dkwhereisksdf'
     pattern2 = 'whereis'
     occurrences = kmp.KMP.find_pattern(text, pattern2)
     print(occurrences)
