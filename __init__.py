@@ -8,7 +8,10 @@ if __name__ == '__main__':
     # zvalues1 = []
     # z.getzvalues(text_pattern, zvalues)
 
-    pattern2 = 'whereislwherkdfwhejswdlwhkwhereis'
+    text = 'whereilwherkwheredfwhejswdlwhereiskwhere'
+    pattern2 = 'whereis'
+    occurrences = kmp.KMP.find_pattern(text, pattern2)
+    print(occurrences)
 
     # Construct keyword tree out of patterns in P
     # tree = keywordtree.KeywordTree()
@@ -17,3 +20,5 @@ if __name__ == '__main__':
     #     tree.insert(p, i + 1)
 
     # tree.dfs(print)
+
+

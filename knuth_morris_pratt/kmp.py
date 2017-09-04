@@ -33,8 +33,8 @@ class KMP:
     @staticmethod
     def find_pattern(text, pattern):
         # Get Z-values of pattern
-        z = zalgorithm.ZAlgorithm()
-        zvalues = z.getzvalues(pattern)
+        zvalues = []
+        zalgorithm.ZAlgorithm.getzvalues(pattern, zvalues)
         print(zvalues)
 
         # Compute spi prime values of the pattern
