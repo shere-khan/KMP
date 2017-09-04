@@ -13,9 +13,9 @@ if __name__ == '__main__':
     z.getzvalues(pattern2, zvalues2)
     print(zvalues2)
     spi_primes = [0] * len(zvalues2)
-    kmp.KMP.map_j_to_i(zvalues2, spi_primes)
+    kmp = kmp.KMP()
+    kmp.map_j_to_i(zvalues2, spi_primes)
     print(spi_primes)
-
     # tree = keywordtree.KeywordTree()
     # P = ['password', 'passive', 'passover', 'heavy']
     # for i, p in enumerate(P):
