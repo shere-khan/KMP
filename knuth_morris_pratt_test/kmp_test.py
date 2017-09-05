@@ -40,11 +40,24 @@ class TestKMP(unittest.TestCase):
 
         self.assertEqual(kmp.KMP.find_pattern(text, pattern), [1])
 
-    # def test_find_pattern_4(self):
-    #     pass
-    #
-    # def test_find_pattern_5(self):
-    #     pass
+    def test_find_pattern_6(self):
+        text = 'where'
+        pattern = 'w'
+
+        self.assertEqual(kmp.KMP.find_pattern(text, pattern), [0])
+
+    def test_find_pattern_7(self):
+        text = 'w'
+        pattern = 'w'
+
+        self.assertEqual(kmp.KMP.find_pattern(text, pattern), [0])
+
+    def test_find_pattern_8(self):
+        text = 'w'
+        pattern = 'where'
+
+        self.assertEqual(kmp.KMP.find_pattern(text, pattern), [])
+
 
 if __name__ == '__main__':
     unittest.main()

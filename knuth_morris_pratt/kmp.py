@@ -35,6 +35,8 @@ class KMP:
 
     @staticmethod
     def find_pattern(text, pattern):
+        if len(text) < len(pattern):
+            return []
         # Get Z-values of pattern
         zvalues = []
         zalgorithm.ZAlgorithm.getzvalues(pattern, zvalues)
