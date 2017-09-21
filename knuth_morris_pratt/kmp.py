@@ -40,15 +40,25 @@ class KMP:
         # Get Z-values of pattern
         zvalues = []
         zalgorithm.ZAlgorithm.getzvalues(pattern, zvalues)
-        print(zvalues)
+        print('zvalues: ', zvalues)
 
         # Compute spi prime values of the pattern
         spi_primes = [0] * len(zvalues)
         KMP.__map_j_to_i(zvalues, spi_primes)
-        print(spi_primes)
+        print('spi_primes: ', spi_primes)
 
         # find pattern
         return KMP.__kmp_algorithm(text, pattern, spi_primes)
+
+    @staticmethod
+    def get_spi_prime_from_spi(spivalues):
+        peak = spivalues[-1]
+        for i, c in reversed(list(enumerate(spivalues))):
+            if c > peak:
+                peak = c
+            if c < peak:
+                spivalues[i] = max(0, spivalues[i] - 1)
+        return spivalues
 
     @staticmethod
     def __failure(i, spi_primes):
