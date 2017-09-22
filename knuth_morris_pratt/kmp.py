@@ -51,14 +51,19 @@ class KMP:
         return KMP.__kmp_algorithm(text, pattern, spi_primes)
 
     @staticmethod
-    def get_spi_prime_from_spi(spivalues):
-        peak = spivalues[-1]
-        for i, c in reversed(list(enumerate(spivalues))):
-            if c > peak:
-                peak = c
-            if c < peak:
-                spivalues[i] = max(0, spivalues[i] - 1)
+    def spi_to_spi_prime(spivalues):
+        for i, c in list(enumerate(spivalues))[:-1]:
+            if spivalues[i + 1] > spivalues[i]:
+                spivalues[i] = 0
+
         return spivalues
+
+    @staticmethod
+    def spiprime_to_spi(spiprimevalues):
+        for i, c in reversed(list(enumerate(spiprimevalues))[:-1]):
+            spiprimevalues[i] = max(spiprimevalues[i + 1] - 1, spiprimevalues[i])
+
+        return spiprimevalues
 
     @staticmethod
     def __failure(i, spi_primes):

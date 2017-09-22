@@ -26,10 +26,3 @@ class Problem2:
 
         return qvalues
 
-    @staticmethod
-    def spi_to_spi_prime(spivalues):
-        pass
-
-    @staticmethod
-    def spi_to_spi_prime(spivalues):
-        pass

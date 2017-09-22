@@ -1,4 +1,5 @@
 import unittest
+from knuth_morris_pratt import kmp
 
 from cot_6417_hw_1 import hw1
 
@@ -40,6 +41,16 @@ class TestProblem2(unittest.TestCase):
         qvalues = hw1.Problem2.multisetsubstrings(text, multiset, sigma_list)
 
         self.assertEqual(qvalues, [3, 0, 0, 2, 0, 0, 0, 3, 0, 0])
+
+    def test_change_spi_to_spi_prime(self):
+        spivalues = [0,0,0,0,0,0,1,2,3,4,0,0,1,2,3,0,1,2,0]
+        kmp.KMP.spi_to_spi_prime(spivalues)
+        self.assertEqual(spivalues, [0,0,0,0,0,0,0,0,0,4,0,0,0,0,3,0,0,2,0])
+
+    def test_change_spi_prime_to_spi(self):
+        spiprimevalues = [0,0,0,0,0,0,0,0,0,4,0,0,0,0,3,0,0,2,0]
+        kmp.KMP.spiprime_to_spi(spiprimevalues)
+        self.assertEqual(spiprimevalues, [0,0,0,0,0,0,1,2,3,4,0,0,1,2,3,0,1,2,0])
 
 
 if __name__ == '__main__':

@@ -58,11 +58,6 @@ class TestKMP(unittest.TestCase):
 
         self.assertEqual(kmp.KMP.find_pattern(text, pattern), [])
 
-    def test_change_spi_to_spi_prime(self):
-        spivalues = [0,0,0,0,0,0,1,2,3,4,0,0,1,2,3,0,1,2,0]
-        kmp.KMP.get_spi_prime_from_spi(spivalues)
-        self.assertEqual(spivalues, [0,0,0,0,0,0,0,0,0,4,0,0,0,0,3,0,0,2,0])
-
 
 if __name__ == '__main__':
     unittest.main()
