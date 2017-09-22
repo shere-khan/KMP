@@ -36,10 +36,10 @@ class TestProblem2(unittest.TestCase):
     def test_find_pattern_1(self):
         text = 'aabbaxyaba'
         multiset = 'aab'
+        sigma_list = [self.alphabet_dict] * len(text)
+        qvalues = hw1.Problem2.multisetsubstrings(text, multiset, sigma_list)
 
-        qvalues = hw1.Problem2.multisetsubstrings(text, multiset, self.alphabet_dict)
-
-        self.assertEqual(qvalues, [5, 3, 3, 0, 0, 0, 0, 3, 0, 0])
+        self.assertEqual(qvalues, [3, 0, 0, 2, 0, 0, 0, 3, 0, 0])
 
 
 if __name__ == '__main__':
