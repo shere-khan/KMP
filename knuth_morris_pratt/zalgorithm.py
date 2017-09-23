@@ -109,6 +109,7 @@ class ZAlgorithm:
         match = False
         for i in pattern[pos2:]:
             # matches
+            val = pattern[pos1]
             if i == pattern[pos1] or i == '*' or pattern[pos1] == '*':
                 match = True
                 zvalue += 1
