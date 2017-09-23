@@ -31,7 +31,8 @@ class ZAlgorithm:
                 # at position zkprime + kprime + 1 until a mismatch is reached
                 if zkprime is beta:
                     pos1 = kprime + beta
-                    pos2 = k + beta
+                    # pos2 = k + beta
+                    pos2 = beta
                     l, k, zvalue = ZAlgorithm.__match_pattern(pattern, pos1, pos2, r, l)
                     zvalues.append(zvalue + beta)
 
@@ -66,7 +67,8 @@ class ZAlgorithm:
                 # of beta plus the number of matched strings starting
                 # at position zkprime + kprime + 1 until a mismatch is reached
                 if zkprime is beta:
-                    pos1 = kprime + beta
+                    # pos1 = kprime + beta
+                    pos1 = beta
                     pos2 = k + beta
                     l, k, zvalue = ZAlgorithm.__match_pattern_wildcard(pattern, pos1, pos2, r, l)
                     zvalues.append(zvalue + beta)
