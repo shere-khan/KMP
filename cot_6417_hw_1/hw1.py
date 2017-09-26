@@ -39,12 +39,18 @@ class Problems:
                 if multiset[c] >= 1:
                     qval += 1
                     multiset[c] -= 1
+                else:
+                    l = k - qval
+                    # l = k + 1 - qval
+                    # if text[l] in multiset:
+                    multiset[text[l]] = multiset[text[l]] + 1
+                    qval -= 1
+                    k -= 1
             else:
-                l = k - qval
-                # l = k + 1 - qval
-                multiset[text[l]] = multiset[text[l]] + 1
-                qval -= 1
-                k -= 1
+                for j in range(1, qval + 1):
+                    l = k - j
+                    multiset[text[l]] = multiset[text[l]] + 1
+                qval = 0
             if qval == multiset_len:
                 l = k + 1 - qval
                 qvalues.append(l)
