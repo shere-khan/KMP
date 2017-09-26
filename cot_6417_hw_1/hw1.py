@@ -1,7 +1,9 @@
 import copy
 
+from knuth_morris_pratt import zalgorithm as z
 
-class Problem2:
+
+class Problems:
     @staticmethod
     def __manuallycompare(pattern, i, alphabet_set, qvalues):
         sigma = copy.deepcopy(alphabet_set)
@@ -20,9 +22,36 @@ class Problem2:
         qvalues = list()
         for k in range(len(text)):
             if k >= r:
-                r = Problem2.__manuallycompare(text, k, sigma_list[k], qvalues)
+                r = Problems.__manuallycompare(text, k, sigma_list[k], qvalues)
             else:
                 qvalues.append(0)
 
         return qvalues
 
+    @staticmethod
+    def find_substrings_of_combos(text, multiset, multiset_len, qvalues):
+        qval = 0
+        # for k, c in enumerate(text):
+        k = 0
+        while k < (len(text)):
+            c = text[k]
+            if c in multiset:
+                if multiset[c] >= 1:
+                    qval += 1
+                    multiset[c] -= 1
+            else:
+                l = k - qval
+                # l = k + 1 - qval
+                multiset[text[l]] = multiset[text[l]] + 1
+                qval -= 1
+                k -= 1
+            if qval == multiset_len:
+                l = k + 1 - qval
+                qvalues.append(l)
+                multiset[text[l]] = multiset[text[l]] + 1
+                qval -= 1
+            k += 1
+
+    @staticmethod
+    def longest_suffix(stringa, stringb):
+        z.ZAlgorithm.getzvalues_longest_suffix()

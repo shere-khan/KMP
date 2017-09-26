@@ -34,11 +34,21 @@ class TestProblem2(unittest.TestCase):
         self.alphabet_dict['y'] = 0
         self.alphabet_dict['z'] = 0
 
+    def test_hw_question_1(self):
+        stringa = 'somethingweirder'
+        stringb = 'methanedlkfeirder'
+        longest_suffix = hw1.Problems.longest_suFfix(stringa, stringb)
+
+        self.assertEqual(longest_suffix, "")
+
     def test_hw_question_2(self):
         text = 'aabbaxyaba'
-        multiset = 'aab'
-        sigma_list = [self.alphabet_dict] * len(text)
-        qvalues = hw1.Problem2.multisetsubstrings(text, multiset, sigma_list)
+        multiset = dict()
+        multiset['a'] = 2
+        multiset['b'] = 1
+
+        qvalues = list()
+        hw1.Problems.find_substrings_of_combos(text, multiset, 3, qvalues)
 
         self.assertEqual(qvalues, [3, 0, 0, 2, 0, 0, 0, 3, 0, 0])
 
